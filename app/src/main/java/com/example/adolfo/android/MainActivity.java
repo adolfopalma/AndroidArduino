@@ -14,15 +14,14 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adolfo.android.DeviceListActivity;
-import com.example.adolfo.android.R;
 //https://github.com/patriotaSJ/Bluetooth
 public class MainActivity extends Activity {
 
-    Button btnOn, btnOff;
+    ImageButton btnArriba, btnAbajo, btnDerecha, btnIzquierda;
     TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
     TextView txtSendorLDR;
     Handler bluetoothIn;
@@ -47,16 +46,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //Link the buttons and textViews to respective views
-        btnOn = (Button) findViewById(R.id.buttonOn);
-        btnOff = (Button) findViewById(R.id.buttonOff);
-        txtString = (TextView) findViewById(R.id.txtString);
-        txtStringLength = (TextView) findViewById(R.id.testView1);
-        sensorView0 = (TextView) findViewById(R.id.sensorView0);
-        sensorView1 = (TextView) findViewById(R.id.sensorView1);
-        sensorView2 = (TextView) findViewById(R.id.sensorView2);
-        sensorView3 = (TextView) findViewById(R.id.sensorView3);
+        btnDerecha = (ImageButton) findViewById(R.id.bDerecha);
+        btnIzquierda = (ImageButton) findViewById(R.id.bIzquierda);
+        btnAbajo = (ImageButton) findViewById(R.id.bAbajo);
+        btnArriba = (ImageButton) findViewById(R.id.bAbajo);
 
-        txtSendorLDR = (TextView) findViewById(R.id.tv_sendorldr);
 
 
         bluetoothIn = new Handler() {
@@ -100,17 +94,31 @@ public class MainActivity extends Activity {
 
 
         // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
-        btnOff.setOnClickListener(new OnClickListener() {
+        btnIzquierda.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                mConnectedThread.write("2");    // Send "0" via Bluetooth
-                Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
+                mConnectedThread.write("I");    // Send "0" via Bluetooth
+                //Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnOn.setOnClickListener(new OnClickListener() {
+        btnDerecha.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                mConnectedThread.write("1");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+                mConnectedThread.write("D");    // Send "1" via Bluetooth
+                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnAbajo.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("A");    // Send "1" via Bluetooth
+                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnArriba.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("U");    // Send "1" via Bluetooth
+                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
             }
         });
     }
