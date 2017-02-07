@@ -94,33 +94,50 @@ public class MainActivity extends Activity {
 
 
         // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
-        btnIzquierda.setOnClickListener(new OnClickListener() {
+      /*  btnIzquierda.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("I");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "I", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnDerecha.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("D");    // Send "1" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "D", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnAbajo.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("A");    // Send "1" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "A", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnArriba.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("U");    // Send "1" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "U", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+    }
+
+    public void pulsarAdelante(View view){
+        mConnectedThread.write("U");    // Send "1" via Bluetooth
+        Toast.makeText(getBaseContext(), "Adelante", Toast.LENGTH_SHORT).show();
+    }
+    public void pulsarAtras(View view){
+        mConnectedThread.write("A");    // Send "1" via Bluetooth
+        Toast.makeText(getBaseContext(), "Atras", Toast.LENGTH_SHORT).show();
+    }
+    public void pulsarDerecha(View view){
+        mConnectedThread.write("D");    // Send "1" via Bluetooth
+        Toast.makeText(getBaseContext(), "Derecha", Toast.LENGTH_SHORT).show();
+    }
+    public void pulsarIzquierda(View view){
+        mConnectedThread.write("I");    // Send "1" via Bluetooth
+        Toast.makeText(getBaseContext(), "Izquierda", Toast.LENGTH_SHORT).show();
     }
 
 

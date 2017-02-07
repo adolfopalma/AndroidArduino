@@ -13,7 +13,8 @@
         android:layout_alignParentStart="true"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/abajo" />
+        android:background="@drawable/abajo"
+        android:onClick="pulsarAtras" />
 
     <ImageButton
         android:id="@+id/bArriba"
@@ -23,7 +24,8 @@
         android:layout_alignLeft="@+id/bAbajo"
         android:layout_alignStart="@+id/bAbajo"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/arriba" />
+        android:background="@drawable/arriba"
+        android:onClick="pulsarAdelante" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -35,7 +37,8 @@
         android:background="@drawable/izquierda"
         android:layout_below="@+id/bDerecha"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="pulsarIzquierda" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -45,6 +48,7 @@
         android:background="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/bIzquierda"
-        android:layout_alignStart="@+id/bIzquierda" />
+        android:layout_alignStart="@+id/bIzquierda"
+        android:onClick="pulsarDerecha" />
 
 </RelativeLayout>
