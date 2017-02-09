@@ -3,12 +3,17 @@ package com.example.adolfo.android;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.UUID;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,12 +24,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //https://github.com/patriotaSJ/Bluetooth
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SensorEventListener{
 
     ImageButton btnArriba, btnAbajo, btnDerecha, btnIzquierda;
     TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
     TextView txtSendorLDR;
     Handler bluetoothIn;
+    TextView tv_x, tv_y, tv_z;
+    SensorManager sensorManager;
+    Sensor ac;
+    Boolean flag;
 
     final int handlerState = 0;        				 //used to identify handler message
     private BluetoothAdapter btAdapter = null;
@@ -42,6 +51,17 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        flag = false;
+
+        List<Sensor> listaSensores;
+        listaSensores = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
+        if (!listaSensores.isEmpty()) {
+
+            ac = listaSensores.get(0);
+            sensorManager.registerListener(this, ac, SensorManager.SENSOR_DELAY_UI);
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -92,35 +112,6 @@ public class MainActivity extends Activity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-
-        // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
-      /*  btnIzquierda.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("I");    // Send "0" via Bluetooth
-                Toast.makeText(getBaseContext(), "I", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnDerecha.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("D");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "D", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnAbajo.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("A");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "A", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnArriba.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mConnectedThread.write("U");    // Send "1" via Bluetooth
-                Toast.makeText(getBaseContext(), "U", Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
     public void pulsarAdelante(View view){
@@ -150,7 +141,7 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-
+        sensorManager.registerListener(this, ac, SensorManager.SENSOR_DELAY_NORMAL);
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
 
@@ -191,6 +182,7 @@ public class MainActivity extends Activity {
     public void onPause()
     {
         super.onPause();
+        sensorManager.unregisterListener(this);
         try
         {
             //Don't leave Bluetooth sockets open when leaving activity
@@ -212,6 +204,50 @@ public class MainActivity extends Activity {
                 startActivityForResult(enableBtIntent, 1);
             }
         }
+    }
+
+    public void pulsarSensor(View v){
+        if(flag)flag=false;
+        else flag=true;
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        tv_x = (TextView)findViewById(R.id.tv_x);
+        tv_y = (TextView)findViewById(R.id.tv_y);
+        tv_z = (TextView)findViewById(R.id.tv_z);
+       if(flag && sensorEvent.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
+
+        tv_x.setText(sensorEvent.values[0]+"");
+        tv_y.setText(sensorEvent.values[1]+"");
+        tv_z.setText(sensorEvent.values[2]+"");
+
+           Double x, y, z;
+           x = Double.parseDouble(tv_x.getText().toString());
+           y = Double.parseDouble(tv_y.getText().toString());
+           z = Double.parseDouble(tv_z.getText().toString());
+
+
+           if((x <=6 && x >= 0) && (y > -5 && y < 5) && (z > 0 && z < 20)){
+               mConnectedThread.write("U");
+           }
+           if((x <=7 && x >= 4) && (y > 0 && y < 8) && (z > 0 && z < 20)){
+               mConnectedThread.write("D");
+           }
+           if((x <=7 && x >= 4) && (y > -9 && y < 0) && (z > 0 && z < 20)){
+               mConnectedThread.write("I");
+           }
+
+           //REPOSO  x=7.4    y= -0.5      z= 5.9
+           // acelerar  x = 3    y = 0.5   z = 9
+           // derecha  x = 5.5   y = 6.9   z 3.3
+           // izquqierda x = 4   y = -8    z = 3.3
+       }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
     }
 
     //create new class for connect thread
@@ -263,6 +299,11 @@ public class MainActivity extends Activity {
 
             }
         }
+
+
     }
+
+
+
 }
 

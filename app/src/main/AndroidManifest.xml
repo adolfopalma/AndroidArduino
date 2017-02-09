@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    android:screenOrientation=
+
 
 
     <application
@@ -22,7 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.adolfo.android.MainActivity"></activity>
+        <activity android:name="com.example.adolfo.android.MainActivity"
+            android:screenOrientation="landscape"
+            >
+        </activity>
     </application>
 
 </manifest>

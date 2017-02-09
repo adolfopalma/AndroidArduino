@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXXXXXXXXXXXXXXXXX"
+        android:id="@+id/tv_x" />
+
     <ImageButton
         android:id="@+id/bAbajo"
         android:layout_marginLeft="16dp"
@@ -50,5 +56,38 @@
         android:layout_alignLeft="@+id/bIzquierda"
         android:layout_alignStart="@+id/bIzquierda"
         android:onClick="pulsarDerecha" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/bSensor"
+        android:background="@android:drawable/ic_media_next"
+        android:onClick="pulsarSensor"
+        android:layout_marginBottom="48dp"
+        android:layout_alignBottom="@+id/bIzquierda"
+        android:layout_toLeftOf="@+id/bIzquierda"
+        android:layout_toStartOf="@+id/bIzquierda"
+        android:layout_marginRight="121dp"
+        android:layout_marginEnd="121dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ZZZZZZZZZZZZZZZZ"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:id="@+id/tv_z"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/bDerecha"
+        android:layout_alignEnd="@+id/bDerecha" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="YYYYYYYYYYYYYYYYYY"
+        android:id="@+id/tv_y"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
