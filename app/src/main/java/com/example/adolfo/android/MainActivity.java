@@ -26,7 +26,7 @@ import android.widget.Toast;
 //https://github.com/patriotaSJ/Bluetooth
 public class MainActivity extends Activity implements SensorEventListener{
 
-    ImageButton btnArriba, btnAbajo, btnDerecha, btnIzquierda;
+    ImageButton btnArriba, btnAbajo, btnDerecha, btnIzquierda, bRotar;
     TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
     TextView txtSendorLDR;
     Handler bluetoothIn;
@@ -70,7 +70,7 @@ public class MainActivity extends Activity implements SensorEventListener{
         btnIzquierda = (ImageButton) findViewById(R.id.bIzquierda);
         btnAbajo = (ImageButton) findViewById(R.id.bAbajo);
         btnArriba = (ImageButton) findViewById(R.id.bAbajo);
-
+        bRotar = (ImageButton) findViewById(R.id.bRotar);
 
 
         bluetoothIn = new Handler() {
@@ -115,20 +115,24 @@ public class MainActivity extends Activity implements SensorEventListener{
     }
 
     public void pulsarAdelante(View view){
-        mConnectedThread.write("U");    // Send "1" via Bluetooth
-        Toast.makeText(getBaseContext(), "Adelante", Toast.LENGTH_SHORT).show();
+        mConnectedThread.write("U");
+
     }
     public void pulsarAtras(View view){
-        mConnectedThread.write("A");    // Send "1" via Bluetooth
-        Toast.makeText(getBaseContext(), "Atras", Toast.LENGTH_SHORT).show();
+        mConnectedThread.write("A");
+
     }
     public void pulsarDerecha(View view){
-        mConnectedThread.write("D");    // Send "1" via Bluetooth
-        Toast.makeText(getBaseContext(), "Derecha", Toast.LENGTH_SHORT).show();
+        mConnectedThread.write("D");
+
     }
     public void pulsarIzquierda(View view){
-        mConnectedThread.write("I");    // Send "1" via Bluetooth
-        Toast.makeText(getBaseContext(), "Izquierda", Toast.LENGTH_SHORT).show();
+        mConnectedThread.write("I");
+
+    }
+    public void pulsarRotar(View view){
+        mConnectedThread.write("T");
+
     }
 
 

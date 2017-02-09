@@ -57,19 +57,6 @@
         android:layout_alignStart="@+id/bIzquierda"
         android:onClick="pulsarDerecha" />
 
-    <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/bSensor"
-        android:background="@android:drawable/ic_media_next"
-        android:onClick="pulsarSensor"
-        android:layout_marginBottom="48dp"
-        android:layout_alignBottom="@+id/bIzquierda"
-        android:layout_toLeftOf="@+id/bIzquierda"
-        android:layout_toStartOf="@+id/bIzquierda"
-        android:layout_marginRight="121dp"
-        android:layout_marginEnd="121dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,6 +75,31 @@
         android:id="@+id/tv_y"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/bSensor"
+        android:background="@android:drawable/sym_def_app_icon"
+        android:onClick="pulsarSensor"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_alignTop="@+id/bIzquierda"
+        android:layout_alignRight="@+id/tv_y"
+        android:layout_alignEnd="@+id/tv_y"
+        android:layout_marginTop="18dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/bRotar"
+        android:layout_alignTop="@+id/bArriba"
+        android:layout_alignRight="@+id/bSensor"
+        android:layout_alignEnd="@+id/bSensor"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:onClick="pulsarRotar" />
 
 
 </RelativeLayout>
